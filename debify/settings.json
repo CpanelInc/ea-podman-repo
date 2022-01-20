@@ -1,0 +1,8 @@
+{
+    "no_files_pkgs" : {
+        "ea-podman-repo" : "It does what it does in pkg.preinst"
+    },
+    "add_to_requires" : {
+        "ea-podman-repo" : [ "gnupg | gnupg2" ]
+    }
+}
