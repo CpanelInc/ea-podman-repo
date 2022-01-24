@@ -20,13 +20,19 @@ Installs pkg repository necessary for some OSs to have a proper podman.
 echo "Nothing to build"
 
 %install
+mkdir -p %{buildroot}/opt/cpanel/ea-podman-repo
+install %{SOURCE0} %{buildroot}/opt/cpanel/ea-podman-repo/initrepo.sh
+
 echo "If your current transaction fails you may need to re-run now that it is configured"
 %if 0%{?rhel} == 0
-echo "Before you do that please run `apt update`" 
+echo 'Before you do that please run `apt update`'
 %endif
 
 %pre
 %include %{SOURCE0}
+
+%files
+%attr(755,root,root) /opt/cpanel/ea-podman-repo/initrepo.sh
 
 %changelog
 * Thu Jan 20 2022 Daniel Muey <dan@cpanel.net> - 1.0-1

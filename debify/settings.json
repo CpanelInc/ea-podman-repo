@@ -1,7 +1,8 @@
 {
-    "no_files_pkgs" : {
-        "ea-podman-repo" : "It does what it does in pkg.preinst"
-    },
+    "put_source0_in_sources" : true,
+    "adjust_install_file_src" : [
+        ["^\\./initrepo\\.sh", "./pkg.preinst"]
+    ],
     "add_to_requires" : {
         "ea-podman-repo" : [ "gnupg | gnupg2" ]
     }
