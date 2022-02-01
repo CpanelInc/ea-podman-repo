@@ -1,10 +1,6 @@
 #!/bin/bash
 
 # This is not in ea-podman because deb dependencies happen before preinst and universal hooks.
-#
-# Having it in ea-cpanel-tools:
-#   1. gets systems ready for container based EA4 packages
-#   2. They can get podman without dep errors that require additional work to resolve
 
 if [ -f /etc/os-release ]; then
     source /etc/os-release
