@@ -12,6 +12,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 AutoReqProv:    no
 
 Source0:        pkg.preinst
+Source1:        initrepo.sh
 
 %description
 Installs pkg repository necessary for some OSs to have a proper podman.
@@ -21,7 +22,7 @@ echo "Nothing to build"
 
 %install
 mkdir -p %{buildroot}/opt/cpanel/ea-podman-repo
-install %{SOURCE0} %{buildroot}/opt/cpanel/ea-podman-repo/initrepo.sh
+install %{SOURCE1} %{buildroot}/opt/cpanel/ea-podman-repo/initrepo.sh
 
 echo "If your current transaction fails you may need to re-run now that it is configured"
 %if 0%{?rhel} == 0
