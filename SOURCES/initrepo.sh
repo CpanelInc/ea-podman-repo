@@ -5,6 +5,14 @@
 if [ -f /etc/os-release ]; then
     source /etc/os-release
 
+    if [ "$ID" == "almalinux" ] && [ "${VERSION_ID:0:1}" == "8" ]; then
+        echo "AlmaLinux 8 needs powertools enabled in order to do podman, ensuring it is enabled …"
+
+        set -x
+        dnf config-manager --set-enabled powertools
+        set +x
+    fi
+
     if [ "$ID" == "centos" ] && [ "$VERSION_ID" == "7" ] && [ ! -s /etc/yum.repos.d/devel:kubic:libcontainers:stable.repo ]; then
         echo "CentOS 7 needs a specific repo to make a newer podman available, attempting to install …"
 
