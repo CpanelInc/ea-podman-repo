@@ -5,6 +5,14 @@
 if [ -f /etc/os-release ]; then
     source /etc/os-release
 
+    if [ "$ID" == "rocky" ] && [ "${VERSION_ID:0:1}" == "8" ]; then
+        echo "Rocky Linux 8 needs powertools enabled in order to do podman, ensuring it is enabled …"
+
+        set -x
+        dnf config-manager --set-enabled powertools
+        set +x
+    fi
+
     if [ "$ID" == "almalinux" ] && [ "${VERSION_ID:0:1}" == "8" ]; then
         echo "AlmaLinux 8 needs powertools enabled in order to do podman, ensuring it is enabled …"
 
