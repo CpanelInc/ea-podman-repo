@@ -21,6 +21,14 @@ if [ -f /etc/os-release ]; then
         set +x
     fi
 
+    if [ "$ID" == "almalinux" ] && [ "${VERSION_ID:0:1}" == "9" ]; then
+        echo "AlmaLinux 9 needs crb enabled in order to do libnsl2-devel for ea-podman, ensuring it is enabled …"
+
+        set -x
+        dnf config-manager --set-enabled crb
+        set +x
+    fi
+
     if [ "$ID" == "centos" ] && [ "$VERSION_ID" == "7" ] && [ ! -s /etc/yum.repos.d/devel:kubic:libcontainers:stable.repo ]; then
         echo "CentOS 7 needs a specific repo to make a newer podman available, attempting to install …"
 
