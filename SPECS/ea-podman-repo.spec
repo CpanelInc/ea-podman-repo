@@ -1,7 +1,7 @@
 Name:           ea-podman-repo
 Version:        1.0
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4552 for more details
-%define release_prefix 5
+%define release_prefix 6
 Release:        %{release_prefix}%{?dist}.cpanel
 Summary:        Ensure podman is available to the system
 License:        GPL
@@ -36,6 +36,9 @@ echo 'Before you do that please run `apt update`'
 %attr(755,root,root) /opt/cpanel/ea-podman-repo/initrepo.sh
 
 %changelog
+* Thu Oct 26 2023 Julian Brown <julian.brown@cpanel.net> - 1.0-6
+- ZC-11296: Add new podman repo for U22
+
 * Tue Oct 04 2022 Dan Muey <dan@cpanel.net> - 1.0-5
 - ZC-10348: Updates for Alma 9 support
 
