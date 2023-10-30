@@ -50,17 +50,17 @@ if [ -f /etc/os-release ]; then
     fi
 
     if [ "$ID" == "ubuntu" ] && [ "$VERSION_ID" == "22.04" ] && [ ! -s /etc/apt/sources.list.d/devel:kubic:libcontainers:unstable.list ]; then
-        echo "Ubuntu 22.04 needs a specific source to make podman available, attempting to install …"
+        echo "Ubuntu $VERSION_ID needs a specific source to make podman available, attempting to install …"
         export APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE="There is currently no other way to make this happen so we want to silence the warning."
 
         set -x
 
-        ubuntu_version='22.04'
+        ubuntu_version=$VERSION_ID
         key_url="https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/unstable/xUbuntu_${ubuntu_version}/Release.key"
         sources_url="https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/unstable/xUbuntu_${ubuntu_version}"
 
-        echo "deb $sources_url/ /" | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:unstable.list
-        curl -fsSL $key_url | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/devel_kubic_libcontainers_unstable.gpg > /dev/null
+        echo "deb $sources_url/ ./" | tee /etc/apt/sources.list.d/devel:kubic:libcontainers:unstable.list
+        curl -fsSL $key_url | gpg --dearmor | tee /etc/apt/trusted.gpg.d/devel_kubic_libcontainers_unstable.gpg > /dev/null
 
         set +x
 
