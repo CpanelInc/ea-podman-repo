@@ -59,7 +59,7 @@ if [ -f /etc/os-release ]; then
         sources_url="https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/unstable/xUbuntu_${VERSION_ID}"
 
         echo "deb $sources_url/ ./" > /etc/apt/sources.list.d/devel:kubic:libcontainers:unstable.list
-        curl -fsSL $key_url | gpg --dearmor | tee /etc/apt/trusted.gpg.d/devel_kubic_libcontainers_unstable.gpg > /dev/null
+        curl -fsSL $key_url | gpg --dearmor > /etc/apt/trusted.gpg.d/devel_kubic_libcontainers_unstable.gpg
 
         set +x
 
