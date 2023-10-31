@@ -55,11 +55,10 @@ if [ -f /etc/os-release ]; then
 
         set -x
 
-        ubuntu_version=$VERSION_ID
-        key_url="https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/unstable/xUbuntu_${ubuntu_version}/Release.key"
-        sources_url="https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/unstable/xUbuntu_${ubuntu_version}"
+        key_url="https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/unstable/xUbuntu_${VERSION_ID}/Release.key"
+        sources_url="https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/unstable/xUbuntu_${VERSION_ID}"
 
-        echo "deb $sources_url/ ./" | tee /etc/apt/sources.list.d/devel:kubic:libcontainers:unstable.list
+        echo "deb $sources_url/ ./" > /etc/apt/sources.list.d/devel:kubic:libcontainers:unstable.list
         curl -fsSL $key_url | gpg --dearmor | tee /etc/apt/trusted.gpg.d/devel_kubic_libcontainers_unstable.gpg > /dev/null
 
         set +x
