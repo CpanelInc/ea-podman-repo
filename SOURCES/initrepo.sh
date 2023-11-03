@@ -48,4 +48,19 @@ if [ -f /etc/os-release ]; then
 
         echo 'Please run this command to have it take effect: `apt update`'
     fi
+
+    if [ "$ID" == "ubuntu" ] && [ "$VERSION_ID" == "22.04" ] && [ ! -s /etc/apt/sources.list.d/devel:kubic:libcontainers:unstable.list ]; then
+        echo "Ubuntu $VERSION_ID needs a specific source to make podman available, attempting to install …"
+        export APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE="There is currently no other way to make this happen so we want to silence the warning."
+
+        key_url="https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/unstable/xUbuntu_${VERSION_ID}/Release.key"
+        sources_url="https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/unstable/xUbuntu_${VERSION_ID}"
+
+        set -x
+        echo "deb $sources_url/ ./" > /etc/apt/sources.list.d/devel:kubic:libcontainers:unstable.list
+        curl -fsSL $key_url | gpg --dearmor > /etc/apt/trusted.gpg.d/devel_kubic_libcontainers_unstable.gpg
+        set +x
+
+        echo 'Please run this command to have it take effect: `apt update`'
+    fi
 fi
