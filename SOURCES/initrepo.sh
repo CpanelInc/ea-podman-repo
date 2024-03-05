@@ -13,6 +13,22 @@ if [ -f /etc/os-release ]; then
         set +x
     fi
 
+    if [ "$ID" == "cloudlinux" ] && [ "${VERSION_ID:0:1}" == "8" ]; then
+        echo "CloudLinux 8 needs appstream enabled in order to do gcc-toolset-11 and podman-docker, ensuring it is enabled …"
+
+        set -x
+        dnf config-manager --set-enabled appstream
+        set +x
+    fi
+
+    if [ "$ID" == "cloudlinux" ] && [ "${VERSION_ID:0:1}" == "9" ]; then
+        echo "CloudLinux 9 needs crb enabled in order to do libnsl2-devel for ea-podman, ensuring it is enabled …"
+
+        set -x
+        dnf config-manager --set-enabled crb
+        set +x
+    fi
+
     if [ "$ID" == "almalinux" ] && [ "${VERSION_ID:0:1}" == "8" ]; then
         echo "AlmaLinux 8 needs powertools enabled in order to do podman, ensuring it is enabled …"
 
